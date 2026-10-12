@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.soaoaos.omarchy-rain-radar-france-widget",
+  "name": "Rain Radar France",
+  "version": "1.0.0",
+  "author": "SoaOaoS",
+  "description": "Radar de pluie pour la France dans la barre Omarchy : radar en direct, prévision à 90 minutes et risque de pluie",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Rain Radar France",
+    "description": "Va-t-il pleuvoir ici, et quand ? Radar en direct, prévision à 90 minutes et risque de pluie",
+    "category": "Weather",
+    "defaultSection": "center",
+    "allowMultiple": false,
+    "defaults": {
+      "refreshMinutes": 10,
+      "autoPlay": true
+    },
+    "schema": [
+      {
+        "key": "refreshMinutes",
+        "type": "number",
+        "label": "Intervalle de rafraîchissement du radar",
+        "description": "Minutes entre deux mises à jour du radar (minimum 5).",
+        "defaultValue": 10,
+        "min": 5,
+        "max": 30,
+        "step": 1
+      },
+      {
+        "key": "autoPlay",
+        "type": "boolean",
+        "label": "Lancer l'animation à l'ouverture",
+        "defaultValue": true
+      }
+    ]
+  }
+}
