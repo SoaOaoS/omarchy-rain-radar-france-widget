@@ -121,6 +121,12 @@ Item {
 
   function queueRadarDownloads(items) {
     var pending = RadarModel.newItems(items, root.processedIds)
+    // a refresh while a frame is still downloading or converting must not
+    // queue that frame again: it would be shown twice
+    if (radarConvertProc.running && radarConvertProc.currentItem) {
+      var inFlight = radarConvertProc.currentItem.id
+      pending = pending.filter(function(item) { return item.id !== inFlight })
+    }
     // Cap how many convert in one pass — only the most recent matter for
     // display, and each conversion costs about a second (a few, the first time).
     root.radarDownloadQueue = pending.slice(-root.observedScans)

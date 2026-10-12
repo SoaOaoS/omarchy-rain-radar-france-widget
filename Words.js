@@ -97,7 +97,7 @@ function t(key, lang) {
 
 // The models name some places in English (LocationModel's "near …", "Pinned
 // location"; MapData's country labels): their French names. "near Avignon"
-// becomes "près d'Avignon".
+// becomes "près d'Avignon", "near Le Havre" "près du Havre".
 var FRENCH_NAMES = { "United Kingdom": "Royaume-Uni", Spain: "Espagne", Italy: "Italie", Switzerland: "Suisse",
                      Germany: "Allemagne", Belgium: "Belgique" }
 function placeName(name, lang) {
@@ -105,6 +105,8 @@ function placeName(name, lang) {
   if (name === "Pinned location") return "Lieu choisi"
   if (name.indexOf("near ") !== 0) return FRENCH_NAMES[name] || name
   var base = name.slice(5)
+  if (base.indexOf("Le ") === 0) return "près du " + base.slice(3)
+  if (base.indexOf("Les ") === 0) return "près des " + base.slice(4)
   return (/^[aeiouyhàâäéèêëîïôöùûüœ]/i.test(base) ? "près d'" : "près de ") + base
 }
 
